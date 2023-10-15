@@ -1,0 +1,47 @@
+{
+  "name": "3d_map_backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "easy backend based on aws services",
+  "main": "index.js",
+  "scripts": {
+    "make_deploy": "cdk deploy unitedCoder"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-lambda-nodejs": "^1.204.0",
+    "@aws-cdk/aws-route53": "^1.203.0",
+    "@aws-cdk/aws-s3": "^1.203.0",
+    "@aws-sdk/client-dynamodb": "^3.357.0",
+    "@aws-sdk/client-ses": "^3.294.0",
+    "@aws-sdk/lib-dynamodb": "^3.266.0",
+    "@shelf/jest-dynamodb": "^3.4.1",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1386.0",
+    "constructs": "^10.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.1.4",
+    "source-map-support": "^0.5.21",
+    "uuid": "^9.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "devDependencies": {
+    "@aws-cdk/core": "^1.189.0",
+    "aws-cdk": "2.30.0",
+    "aws-cdk-lib": "2.31.1",
+    "express": "^4.18.2",
+    "jest": "^29.4.2",
+    "jsonschema": "^1.4.1",
+    "jwt-decode": "^3.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siyuansdsd/3D_Map_Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siyuansdsd/3D_Map_Backend/issues"
+  },
+  "homepage": "https://github.com/siyuansdsd/3D_Map_Backend#readme"
+}
