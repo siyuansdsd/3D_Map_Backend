@@ -4,7 +4,7 @@ import * as Dynamodb from "aws-cdk-lib/aws-dynamodb"
 export function createDynamoDB(stack, marksDBName, usersDBName) {
     const marksTable = new Dynamodb.Table(stack, "marks-Table", {
         tableName: marksDBName,
-        partitionKey: { name: "type", type: Dynamodb.AttributeType.STRING },
+        partitionKey: { name: "marks", type: Dynamodb.AttributeType.STRING },
         sortKey: { name: "id", type: Dynamodb.AttributeType.STRING },
         removalPolicy: Cdk.RemovalPolicy.DESTROY, // Only use destroy this in testing
         stream: Dynamodb.StreamViewType.NEW_AND_OLD_IMAGES,
