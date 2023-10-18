@@ -3,8 +3,8 @@ import DynamoDB from "./db.js"
 const dynamoDB = new DynamoDB()
 const UsertableName = 'users-DB-20231015'
 
-const makeId = (name, email) => {
-    const ID = name + email
+const makeId = (email, code) => {
+    const ID = email + code
     return ID
 }
 
@@ -23,7 +23,7 @@ export const UsersPostHandler = async (event) => {
         },
         Item: {
             users: 'user',
-            ID: makeId(item.name, item.email),
+            id: makeId(item.email, item.code),  
             ...item,
         },
     }
@@ -38,7 +38,7 @@ export const UsersPostHandler = async (event) => {
                 'Access-Control-Allow-Origin': "*",
             },
             body: JSON.stringify({
-                message: `Successfully added user`
+                message: `Successfully added user ${item.name}`
             }),
         }
     }
@@ -65,12 +65,9 @@ export const UsersGetOneHandler = async (event) => {
     const item = body
     const params = {
         TableName: UsertableName,
-        headers: {
-            'Access-Control-Allow-Origin': "*",
-        },
         Key: {
             users: 'user',
-            ID: makeId(item.name, item.email),
+            id: makeId(item.email, item.code),
         },
     }
 
