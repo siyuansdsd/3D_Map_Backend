@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 console.log(__dirname)
 
-function createApiStack(Stack, MarksTable, MarksDbArn ){
+function createApiStack(Stack, MarksTable, MarksDbArn){
     const MarksLambda = new NodejsFunction(Stack, "MarksLambda", {
         runtime: Lambda.Runtime.NODEJS_16_X,
         handler: "marksHandler",
@@ -40,8 +40,8 @@ function createApiStack(Stack, MarksTable, MarksDbArn ){
     const marks = api.root.addResource("marks")
     const marksId = marks.addResource("{id}")
 
-    const marksMethod = ["POST", "GET", "PUT"]
-    const marksIdMethod = ["POST", "GET", "DELETE", "PUT"]
+    const marksMethod = ["POST", "GET", "PUT", "OPTIONS"]
+    const marksIdMethod = ["GET", "DELETE", "PUT", "OPTIONS"]
 
     marksMethod.forEach((method) => {
         marks.addMethod(method, new Apigateway.LambdaIntegration(MarksLambda))

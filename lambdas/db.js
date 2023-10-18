@@ -81,7 +81,7 @@ export default class DynamoDB {
   }
 
   async dbQuery(props) {
-    logger.info("Query params: " + JSON.stringify(props))
+    console.info("Query params: " + JSON.stringify(props))
     try {
       const response = await dynamo.send(new QueryCommand(props))
       console.info("[DB] dbQuery: " + JSON.stringify(response))

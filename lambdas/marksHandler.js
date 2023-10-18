@@ -14,6 +14,9 @@ export const MarksPostHandler = async (event) => {
     const mark_id = item.ID
     const params = {
         TableName: 'marks-DB-20231015',
+        headers: {
+            'Access-Control-Allow-Origin': "*",
+        },
         Item: {
             marks: 'mark',
             ...item,
@@ -26,9 +29,11 @@ export const MarksPostHandler = async (event) => {
     } else {
         return {
             statusCode: 201,
+            headers: {
+                'Access-Control-Allow-Origin': "*",
+            },
             body: JSON.stringify({
-                message: `Successfully added ${mark_type} with id ${mark_id}`,
-                property: item,
+                message: `Successfully added ${mark_type} with id ${mark_id}`
             }),
         }
     }
@@ -45,8 +50,38 @@ export const MarksGetAllHandler = async () => {
     } else {
         return {
             statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': "*",
+            },
             body: JSON.stringify({
                 message: "Successfully retrieved all marks",
+                property: response.data,
+            }),
+        }
+    }
+}
+
+export const MarksGetOneHandler = async (event) => {
+    const mark_id = event.pathParameters.id
+    const params = {
+        TableName: 'marks-DB-20231015',
+        Key: {
+            marks: "mark",
+            id: mark_id,
+        },
+    }
+
+    const response = await dynamoDB.dbGet(params)
+    if (response.statusCode !== 200) {
+        throw new Error(response.errorMessage)
+    } else {
+        return {
+            statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': "*",
+            },
+            body: JSON.stringify({
+                message: `Successfully retrieved mark with id ${mark_id}`,
                 property: response.data,
             }),
         }
@@ -69,9 +104,27 @@ export const MarksDeleteHandler = async (event) => {
     } else {
         return {
             statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': "*",
+            },
             body: JSON.stringify({
                 message: `Successfully deleted mark with id ${mark_id}`,
             }),
         }
+    }
+}
+
+
+export const options = async (event) => {
+    return {
+        statusCode: 200,
+        headers: {
+            'Access-Control-Allow-Origin': "*",
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,DELETE',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        },
+        body: JSON.stringify({
+            message: "hello from United Coder",
+        }),
     }
 }

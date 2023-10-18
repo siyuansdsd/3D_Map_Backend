@@ -4,7 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const entry = {
-  'lambdas/index': path.resolve(__dirname, './lambdas/main/index.js'),
+  'lambdas/index': path.resolve(__dirname, './lambdas/main/index_.js'),
 }
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
   },
   mode: 'production',
   output: {
-    filename: 'build.js',
+    filename: 'build_.js',
     path: path.resolve(__dirname, 'dist'),
   },
   experiments: {

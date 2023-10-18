@@ -1,6 +1,7 @@
-import {MarksPostHandler} from '../marksHandler.js'
-import {MarksGetAllHandler} from '../marksHandler.js'
-import {MarksDeleteHandler} from '../marksHandler.js'
+import { MarksPostHandler } from '../marksHandler.js'
+import { MarksGetAllHandler } from '../marksHandler.js'
+import { MarksDeleteHandler } from '../marksHandler.js'
+import { options } from '../marksHandler.js'
 
 exports.marksHandler = async (event) => {
     try {
@@ -11,6 +12,8 @@ exports.marksHandler = async (event) => {
                 return await MarksGetAllHandler(event)
             case "DELETE":
                 return await MarksDeleteHandler(event)
+            case "OPTIONS":
+                return await options(event)
             default:
                 return {
                     statusCode: 400,
