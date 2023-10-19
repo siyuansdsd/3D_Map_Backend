@@ -37,12 +37,18 @@ function createUsersApi (Stack, UsersTable, UsersDbArn) {
         description: "This service serves Users.",
     })
 
-    const usersMethod = ["POST", "GET", "OPTIONS"]
+    const usersMethod = ["POST", "OPTIONS"]
+    const usersIdMethod = ["GET", "DELETE", "PUT", "OPTIONS"]
 
     const users = user_api.root.addResource("users")
+    const usersId = users.addResource("{id}")
 
     usersMethod.forEach((method) => {
         users.addMethod(method, new Apigateway.LambdaIntegration(UsersLambda))
+    })
+
+    usersIdMethod.forEach((method) => {
+        usersId.addMethod(method, new Apigateway.LambdaIntegration(UsersLambda))
     })
 
     new Cdk.CfnOutput(Stack, "Users API URL", {
